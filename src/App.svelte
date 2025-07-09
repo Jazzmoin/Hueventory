@@ -15,7 +15,7 @@
 </script>
 
 <main class="main">
-    <div class="column" style="flex-grow:1.75">
+    <div class="column" style="flex-grow:2">
         <div class="swatch-container">
             {#each $colourInfo as colour}
                 <ColourSwatch {colour} />
@@ -43,7 +43,6 @@
     .swatch-container {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.25rem;
     }
 
     :global(.column) {
