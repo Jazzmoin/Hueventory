@@ -1,28 +1,23 @@
 <!-- Todo: -->
-<!--    - chart to display percentage of colours owned -->
-<!--    - fix colour of text on some -->
-
+<!--    - fun chars to display colours owned and colour percentage of colour categories owned -->
+<!--    - fix colour of text on some of the swatches -->
+<!--    - add other pages for different brands? -->
+<!--    - colour opactity is lowered and a tick appears in the bottom right for owned colours -->
 
 <script lang="ts">
   import ColourSwatch from "./lib/components/ColourSwatch.svelte";
-  import { loadColours } from './lib/stores/loadColours';
-  import { colours } from './lib/stores/colours';
   import {onMount} from "svelte";
+  import { colourInfo, loadColours } from './lib/utils/loadColours';
 
-  onMount(async () => {
-      try {
-          const data = await loadColours();
-          colours.set(data);
-      } catch(e) {
-          console.error('Error loading colours:', e);
-      }
+  onMount(() => {
+      loadColours().catch(e => console.error('Failed to load colours', e));
   });
 </script>
 
 <main class="main">
     <div class="column" style="flex-grow:1.75">
         <div class="swatch-container">
-            {#each $colours as colour}
+            {#each $colourInfo as colour}
                 <ColourSwatch {colour} />
             {/each}
         </div>
@@ -48,7 +43,7 @@
     .swatch-container {
         display: flex;
         flex-wrap: wrap;
-        gap: 1rem;
+        gap: 0.25rem;
     }
 
     :global(.column) {
