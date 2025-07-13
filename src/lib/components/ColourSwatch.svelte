@@ -42,7 +42,6 @@
     }
 </style>
 
-
 <div class="swatch" style="background-color: {colourInfo.colour}; color: {textColour}">
     <div class="box">
         <div class="info">
