@@ -23,14 +23,8 @@
 
 <style>
     .swatch {
-        display: flex;
-        align-items: center;
-    }
-
-    .box {
         width: 10em;
         height: 10em;
-        /*background-color: var(--colour);*/
         border-radius: 4px;
     }
 
@@ -38,16 +32,14 @@
         font-family: sans-serif;
         text-align: left;
         padding: 0.5em;
-        /*color: ;*/
+        font-weight: bold;
     }
 </style>
 
 <div class="swatch" style="background-color: {colourInfo.colour}; color: {textColour}">
-    <div class="box">
         <div class="info">
             <div>{colourInfo.name}</div>
             <div>{colourInfo.code}</div>
             <div>{colourInfo.colour}</div>
         </div>
-    </div>
 </div>

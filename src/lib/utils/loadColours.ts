@@ -10,7 +10,7 @@ export interface Colour {
 }
 
 export async function loadColours() {
-    const res = await fetch('/colours.json');
+    const res = await fetch('colours.json');
     if (!res.ok) throw new Error('Failed to load colours');
 
     const raw = await res.json() as Colour[];
