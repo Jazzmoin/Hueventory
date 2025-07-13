@@ -8,6 +8,7 @@
   import ColourSwatch from "./lib/components/ColourSwatch.svelte";
   import {onMount} from "svelte";
   import { colourInfo, loadColours } from './lib/utils/loadColours';
+  import type {Colour} from "./lib/utils/loadColours";
 
   onMount(() => {
       loadColours().catch(e => console.error('Failed to load colours', e));
@@ -17,7 +18,7 @@
 <main class="main">
     <div class="column" style="flex-grow:2">
         <div class="swatch-container">
-            {#each $colourInfo as colour}
+            {#each $colourInfo.values() as colour}
                 <ColourSwatch {colour} />
             {/each}
         </div>
@@ -43,6 +44,8 @@
     .swatch-container {
         display: flex;
         flex-wrap: wrap;
+        gap: 0.5em;
+        padding: 0;
     }
 
     :global(.column) {
