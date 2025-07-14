@@ -6,6 +6,7 @@
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
+    overflow-y: hidden;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -41,8 +42,8 @@ h1 {
 
 #app {
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+    padding: 1rem 3rem 3rem;
+    text-align: left;
 }
 
 button {

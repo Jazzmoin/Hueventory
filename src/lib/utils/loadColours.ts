@@ -19,10 +19,6 @@ export async function loadColours() {
 
     deduplicated.sort((a, b) => Number(a.code) - Number(b.code));
 
-    // let cats = new Set(deduplicated.map(c => c.category));
-    // console.log(cats);
-
-
     colourInfo.set(deduplicated);
 
     return deduplicated;

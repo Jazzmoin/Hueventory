@@ -19,6 +19,8 @@
         textColour = "#4d4d4d"
     }
 
+    let on = $state(false);
+
 </script>
 
 <style>
@@ -26,6 +28,10 @@
         width: 10em;
         height: 10em;
         border-radius: 4px;
+    }
+
+    .swatch:hover {
+        box-shadow: 0px 0px 5px 2px rgba(255, 255, 255, 0.68) !important;
     }
 
     .info {
@@ -37,9 +43,9 @@
 </style>
 
 <div class="swatch" style="background-color: {colourInfo.colour}; color: {textColour}">
-        <div class="info">
-            <div>{colourInfo.name}</div>
-            <div>{colourInfo.code}</div>
-            <div>{colourInfo.colour}</div>
-        </div>
+    <div class="info">
+        <div>{colourInfo.name}</div>
+        <div>{colourInfo.code}</div>
+        <div>{colourInfo.colour}</div>
+    </div>
 </div>
