@@ -7,12 +7,14 @@
   import ColourSwatch from "./lib/components/ColourSwatch.svelte";
   import {onMount} from "svelte";
   import { colourInfo, loadColours } from './lib/utils/loadColours';
+  import { ownedColours } from './lib/utils/ownedColours';
 
   onMount(() => {
       loadColours().catch(e => console.error('Failed to load colours', e));
   });
 
-  $: categories = Array.from(new Set($colourInfo.map(c => c.category)));
+  $: categories = Array.from(new Set($colourInfo.map(c => c.category)))
+
 </script>
 
 <h1>Hueventory</h1>
@@ -37,7 +39,7 @@
             <div class="stats">
                 <div>
                     <h2>Stats</h2>
-                    <p>Colours Owned: </p>
+                    <p></p>
                 </div>
             </div>
         </div>
@@ -85,7 +87,6 @@
 
     h2 {
         position: sticky;
-        /*text-align: left;*/
         background-color: #242424;
         top: 0;
         padding: 0.5rem 0;
