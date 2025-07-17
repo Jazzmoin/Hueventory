@@ -32,8 +32,6 @@
 
 </script>
 
-<h1>Hueventory</h1>
-
 <main class="main">
         <div class="column" style="flex-grow:2">
             <div class="swatch-container">
