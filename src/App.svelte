@@ -1,7 +1,7 @@
 <!-- Todo: -->
 <!--    - fun charts to display colours owned and colour percentage of colour categories owned -->
 <!--    - add other pages for different brands? -->
-<!--    - colour opactity is lowered and a tick appears in the bottom right for owned colours -->
+<!--    - colour opacity is lowered and a tick appears in the bottom right for owned colours -->
 
 <script lang="ts">
   import ColourSwatch from "./lib/components/ColourSwatch.svelte";
@@ -11,9 +11,24 @@
 
   onMount(() => {
       loadColours().catch(e => console.error('Failed to load colours', e));
-  });
+  })
 
   $: categories = Array.from(new Set($colourInfo.map(c => c.category)))
+  $: totalColours = $colourInfo.length;
+  $: totalOwned = $colourInfo.filter(c => $ownedColours.has(c.code)).length;
+  $: ownedPercentage = totalColours > 0 ? (totalOwned / totalColours) * 100 : 0;
+  $: categoryStats = categories.map(category => {
+      const coloursInCategory = $colourInfo.filter(c => c.category == category).length
+      const ownedInCategory = $colourInfo.filter(c => c.category === category && $ownedColours.has(c.code)).length;
+
+      return {
+          category,
+          owned: ownedInCategory,
+          total: coloursInCategory,
+          percent: coloursInCategory > 0 ? (ownedInCategory / coloursInCategory) * 100 : 0
+      };
+  });
+
 
 </script>
 
@@ -38,8 +53,16 @@
         <div class="column" style="flex-grow:0.5">
             <div class="stats">
                 <div>
-                    <h2>Stats</h2>
-                    <p></p>
+                    <h2>
+                        Total Owned: {totalOwned}/{totalColours}
+                        ({ownedPercentage.toFixed(1)}%)
+                    </h2>
+                    {#each categoryStats as stat}
+                        <p>
+                            {stat.category}: {stat.owned} / {stat.total}
+                            ({stat.percent.toFixed(1)}%)
+                        </p>
+                    {/each}
                 </div>
             </div>
         </div>
@@ -89,7 +112,7 @@
         position: sticky;
         background-color: #242424;
         top: 0;
-        padding: 0.5rem 0;
+        /*padding: 0.5rem 0;*/
         z-index: 10;
     }
 
