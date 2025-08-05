@@ -30,7 +30,7 @@
   });
 
 
-  const commit = import.meta.env.VITE_PUBLIC_COMMIT_HASH; // or whatever prefix you used
+  const commit: string = import.meta.env.VITE_PUBLIC_COMMIT_HASH; // or whatever prefix you used
 
 </script>
 
@@ -65,7 +65,7 @@
                     {/each}
                 </div>
             </div>
-            <span style="position: fixed; bottom: 2em">{commit}</span>
+            <span style="position: fixed; bottom: 2em">Built from commit <a href="https://github.com/Jazzmoin/Hueventory/commit/{commit}">{commit.slice(0,8)}</a></span>
         </div>
 </main>
 
