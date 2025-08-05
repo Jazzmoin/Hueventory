@@ -1,8 +1,9 @@
 <script lang="ts">
-    import type {Colour} from "../utils/loadColours";
-    import {ownedColours, toggleOwned} from "../utils/ownedColours";
+    import type {Colour} from "../utils/loadColours.svelte";
+    import {toggleOwned} from "../utils/ownedColours.svelte";
 
-    export let colour: Colour;
+    let {colour, isOwned}: {colour: Colour, isOwned: boolean} = $props();
+
     let colourHex = colour.colour;
 
     let r = parseInt(colourHex.slice(1,3), 16);
@@ -14,7 +15,6 @@
     let average = (max_v + min_v) / 2;
 
     const textColour = average >= 128 ? "#4d4d4d" : "white";
-    $: isOwned = colour && $ownedColours.has(colour.code);
 </script>
 
 <style>
