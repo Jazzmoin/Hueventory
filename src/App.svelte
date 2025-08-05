@@ -63,6 +63,7 @@
                     {/each}
                 </div>
             </div>
+            <span style="position: fixed; bottom: 2em">Footer</span>
         </div>
 </main>
 
