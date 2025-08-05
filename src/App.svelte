@@ -30,6 +30,8 @@
   });
 
 
+  const commit = import.meta.env.VITE_PUBLIC_COMMIT_HASH; // or whatever prefix you used
+
 </script>
 
 <main class="main">
@@ -63,7 +65,7 @@
                     {/each}
                 </div>
             </div>
-            <span style="position: fixed; bottom: 2em">Footer</span>
+            <span style="position: fixed; bottom: 2em">{commit}</span>
         </div>
 </main>
 
