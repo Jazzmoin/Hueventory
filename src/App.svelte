@@ -8,7 +8,6 @@
     import {onMount} from "svelte";
     import {colourInfo, loadColours} from './lib/utils/loadColours.svelte'
     import {ownedColours} from './lib/utils/ownedColours.svelte';
-    import {writable} from "svelte/store";
 
     onMount(() => {
         loadColours().catch(e => console.error('Failed to load colours', e));
@@ -43,15 +42,15 @@
 
     const commit: string = import.meta.env.VITE_PUBLIC_COMMIT_HASH;
 
-    const showStats = writable(false);
+    let showStats = $state(false);
 </script>
 
 <main class="main">
-    <div class="column" style="flex-grow:2">
+    <div class="column" style="flex-grow: 4;">
         <header class="topbar">
             <h1>Hueventory</h1>
         </header>
-        <button class="menu" on:click={() => showStats.update(v => !v)}>
+        <button class="menu" onclick={() => showStats = !showStats}>
             ☰
         </button>
 
@@ -69,7 +68,7 @@
         </div>
     </div>
 
-    <div class="column stats-sidebar" class:open={$showStats}>
+    <div class="column stats-sidebar" style="flex-grow: 1" class:open={showStats}>
         <div class="stats">
             <div>
                 <h2>
@@ -100,23 +99,30 @@
         flex-direction: row;
         box-sizing: border-box;
         height: 100vh;
+        width: 100%;
     }
 
     .swatch-group {
-        display: flex;
+
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
         flex-wrap: wrap;
         gap: 0.5rem;
-        justify-content: space-between;
     }
 
     .swatch-container {
         display: block;
         overflow: auto;
         scrollbar-width: none;
+        width: 100%;
+        align-items: start;
+        box-sizing: border-box;
     }
 
-    :global(.column) {
-        flex: 1 1 0;
+    .column {
+        flex-basis: 0;
+        flex-shrink: 1;
+        /*flex: 1 1 0;*/
         min-width: 0;
         display: flex;
         flex-direction: column;
@@ -132,10 +138,6 @@
         background-color: #242424;
         top: 0;
         z-index: 10;
-    }
-
-    p {
-        text-align: left;
     }
 
     .topbar h1 {
@@ -162,6 +164,11 @@
     }
 
     @media (max-width: 768px) {
+        .swatch-group {
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            overflow: clip;
+        }
+
         .menu {
             display: block;
             position: fixed;

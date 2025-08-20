@@ -19,13 +19,17 @@
 
 <style>
     .swatch {
-        flex: 1 1 calc(16.67% - 0.5rem);
         aspect-ratio: 1 / 1;
-        max-width: 8rem;
-        max-height: 8rem;
+        display: grid;
+        /*place-items: center;*/
         border-radius: 4px;
         cursor: pointer;
         transition: 0.2s ease all;
+
+        min-width: 0;
+        min-height: 0;
+        overflow: hidden;
+        box-sizing: border-box;
     }
 
     .swatch:hover {
@@ -38,16 +42,9 @@
         padding: 0.5em;
         font-weight: bold;
     }
-
-    @media (max-width: 768px) {
-        .swatch {
-            flex: 1 1 calc(50% - 0.5rem);
-            max-width: 8rem;
-        }
-    }
 </style>
 
-<div on:click={() => toggleOwned(colour.code)}
+<div onclick={() => toggleOwned(colour.code)}
      class="swatch"
      style="background-color: {colour.colour}; opacity: {isOwned ? 0.2 : 1}; color: {textColour}">
     <div class="info">
