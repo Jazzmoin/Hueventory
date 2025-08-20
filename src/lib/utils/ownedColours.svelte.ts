@@ -11,8 +11,8 @@ $effect.root(() => {
     });
 });
 
-export function toggleOwned(code: string) {
-    ownedColours.data = ownedColours.data.has(code)
-        ? new Set([...ownedColours.data].filter(c => c !== code))
-        : new Set([...ownedColours.data, code]);
+export function toggleOwned(colour: string) {
+    ownedColours.data = ownedColours.data.has(colour)
+        ? new Set([...ownedColours.data].filter(c => c !== colour))
+        : new Set([...ownedColours.data, colour]);
 }

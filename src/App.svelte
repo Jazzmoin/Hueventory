@@ -60,7 +60,7 @@
                     <h2>{category}</h2>
                     <div class="swatch-group">
                         {#each colourInfo.data.filter(c => c.category === category) as colour}
-                            <ColourSwatch colour={colour} isOwned={ownedColours.data.has(colour.code)}/>
+                            <ColourSwatch colour={colour} isOwned={ownedColours.data.has(colour.colour)}/>
                         {/each}
                     </div>
                 </section>

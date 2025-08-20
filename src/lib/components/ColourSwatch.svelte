@@ -44,7 +44,7 @@
     }
 </style>
 
-<div onclick={() => toggleOwned(colour.code)}
+<div onclick={() => toggleOwned(colour.colour)}
      class="swatch"
      style="background-color: {colour.colour}; opacity: {isOwned ? 0.2 : 1}; color: {textColour}">
     <div class="info">
