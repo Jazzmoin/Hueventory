@@ -19,15 +19,17 @@
 
 <style>
     .swatch {
-        width: 10em;
-        height: 10em;
+        flex: 1 1 calc(16.67% - 0.5rem);
+        aspect-ratio: 1 / 1;
+        max-width: 8rem;
+        max-height: 8rem;
         border-radius: 4px;
         cursor: pointer;
         transition: 0.2s ease all;
     }
 
     .swatch:hover {
-        box-shadow: 0px 0px 5px 2px rgba(255, 255, 255, 0.68) !important;
+        box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.68) !important;
     }
 
     .info {
@@ -35,6 +37,13 @@
         text-align: left;
         padding: 0.5em;
         font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+        .swatch {
+            flex: 1 1 calc(50% - 0.5rem);
+            max-width: 8rem;
+        }
     }
 </style>
 

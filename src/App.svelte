@@ -8,6 +8,7 @@
     import {onMount} from "svelte";
     import {colourInfo, loadColours} from './lib/utils/loadColours.svelte'
     import {ownedColours} from './lib/utils/ownedColours.svelte';
+    import {writable} from "svelte/store";
 
     onMount(() => {
         loadColours().catch(e => console.error('Failed to load colours', e));
@@ -41,10 +42,19 @@
     });
 
     const commit: string = import.meta.env.VITE_PUBLIC_COMMIT_HASH;
+
+    const showStats = writable(false);
 </script>
 
 <main class="main">
     <div class="column" style="flex-grow:2">
+        <header class="topbar">
+            <h1>Hueventory</h1>
+        </header>
+        <button class="menu" on:click={() => showStats.update(v => !v)}>
+            ☰
+        </button>
+
         <div class="swatch-container">
             {#each categories as category}
                 <section class="colour-section">
@@ -58,7 +68,8 @@
             {/each}
         </div>
     </div>
-    <div class="column" style="flex-grow:0.5">
+
+    <div class="column stats-sidebar" class:open={$showStats}>
         <div class="stats">
             <div>
                 <h2>
@@ -95,15 +106,13 @@
         display: flex;
         flex-wrap: wrap;
         gap: 0.5rem;
-        margin: 5px;
+        justify-content: space-between;
     }
 
     .swatch-container {
         display: block;
-        gap: 0.5em;
         overflow: auto;
         scrollbar-width: none;
-        padding: 0 1rem 10rem 0;
     }
 
     :global(.column) {
@@ -118,20 +127,72 @@
         margin-bottom: 2rem;
     }
 
-    h1 {
-        text-align: left;
-        padding: 0;
-    }
-
     h2 {
         position: sticky;
         background-color: #242424;
         top: 0;
-        /*padding: 0.5rem 0;*/
         z-index: 10;
     }
 
     p {
         text-align: left;
+    }
+
+    .topbar h1 {
+        margin: 0;
+        font-size: 2rem;
+        color: white;
+        position: sticky;
+        padding-top: 0.5em;
+        z-index: 5;
+    }
+
+    .menu {
+        display: none;
+        background: none;
+        font-size: 1.8rem;
+        cursor: pointer;
+        color: white;
+    }
+
+    .stats-sidebar .stats {
+        background-color: #242424;
+        padding: 4rem 2rem 2rem;
+        box-sizing: border-box;
+    }
+
+    @media (max-width: 768px) {
+        .menu {
+            display: block;
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 100;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        .stats-sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 250px;
+            background: #242424;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: 20;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+            padding: 0.2rem 1rem 1rem;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .stats-sidebar.open {
+            transform: translateX(0);
+        }
     }
 </style>
